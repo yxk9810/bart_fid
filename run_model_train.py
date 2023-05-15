@@ -19,6 +19,7 @@ from torch.utils.data.distributed import DistributedSampler
 import os
 
 os.environ['MASTER_ADDR'] = 'localhost'
+os.environ['MASTER_PORT'] = '5678'
 
 def main():
     parser = argparse.ArgumentParser()
