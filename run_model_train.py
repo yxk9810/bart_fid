@@ -16,6 +16,9 @@ from bart_generation import FusionModel
 from fid_model import FiDBART
 from transformers import AdamW, get_linear_schedule_with_warmup, BartConfig, BartModel, BertTokenizer, BartForConditionalGeneration
 from torch.utils.data.distributed import DistributedSampler
+import os
+
+os.environ['MASTER_ADDR'] = 'localhost'
 
 def main():
     parser = argparse.ArgumentParser()
@@ -54,7 +57,7 @@ def main():
     parser.add_argument('--rank', type=int, default=0, help='Index of current task')  
     parser.add_argument('--world_size', type=int, default=1, help='Total number of tasks')  
     parser.add_argument('--dist_backend', type=str, default='nccl', help='distributed backend')
-    parser.add_argument('--init_method', default=None, help='print process when training')  
+    parser.add_argument('--init_method', default=None, help='print process when training')
 
     args = parser.parse_args()
     ngpus_per_node = torch.cuda.device_count()
