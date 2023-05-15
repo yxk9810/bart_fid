@@ -9,7 +9,6 @@ import os
 import time
 import sys
 import math
-import moxing as mox
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 from chunk_dataset import TextDataset
@@ -17,8 +16,6 @@ from bart_generation import FusionModel
 from fid_model import FiDBART
 from transformers import AdamW, get_linear_schedule_with_warmup, BartConfig, BartModel, BartTokenizer, BartForConditionalGeneration
 from torch.utils.data.distributed import DistributedSampler
-
-mox.file.shift('os', 'mox')
 
 def main():
     parser = argparse.ArgumentParser()
