@@ -215,12 +215,15 @@ def fit(model, X_train, X_test, args, global_rank):
             gen_loss = train_step(model, batch, args)
             gen_loss = gen_loss.mean()
             loss = gen_loss
+            if args.gradient_accumulation_steps>1:
+                loss = loss / args.gradient_accumulation_steps
             loss.backward()
             total_loss += loss.item()
             torch.nn.utils.clip_grad_norm_(model.parameters(), args.max_grad_norm)
-            optimizer.step()
-            scheduler.step()
-            model.zero_grad()
+            if (step+1)%args.gradient_accumulation_steps ==0:
+                optimizer.step()
+                scheduler.step()
+                model.zero_grad()
             global_step += 1
             if global_rank == 0 and step > 0:
                 # print ever 100 local step
