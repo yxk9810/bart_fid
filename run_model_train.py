@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader
 from chunk_dataset import TextDataset
 from bart_generation import FusionModel
 from fid_model import FiDBART
-from transformers import AdamW, get_linear_schedule_with_warmup, BartConfig, BartModel, BartTokenizer, BartForConditionalGeneration
+from transformers import AdamW, get_linear_schedule_with_warmup, BartConfig, BartModel, BertTokenizer, BartForConditionalGeneration
 from torch.utils.data.distributed import DistributedSampler
 
 def main():
@@ -62,7 +62,7 @@ def main():
     args.batch_size = args.per_gpu_train_batch_size
     args.test_batch_size = args.per_gpu_eval_batch_size
 
-    tokenizer = BartTokenizer.from_pretrained(args.tokenizer_name)
+    tokenizer = BertTokenizer.from_pretrained(args.tokenizer_name)
     tokenizer.add_tokens("[title]")
     tokenizer.add_tokens("[ref]")
     # tokenizer.add_tokens("[0]")
