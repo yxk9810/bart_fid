@@ -52,8 +52,8 @@ class TextDataset(Dataset):
             "target_labels": np.asarray(target_labels, dtype=np.int64),
             "target_remark_labels": np.asarray(target_remark_labels, dtype=np.int64)
         }
-        print(batch)
-        sys.exit(1)
+        # print(batch)
+        # sys.exit(1)
 
         return batch
 
