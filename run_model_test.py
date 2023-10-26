@@ -5,7 +5,7 @@ import numpy as np
 import os
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from text_dataset import TextDataset
+from chunk_dataset import TextDataset
 from bart_generation import FusionModel
 from fid_model import FiDBART
 from transformers import AdamW, get_linear_schedule_with_warmup, BartConfig, BartModel, BertTokenizer, BartForConditionalGeneration
