@@ -18,6 +18,9 @@ class TextDataset(Dataset):
         target = line[-1]
         source = line[:-1]
         source = source[:self._max_ref_num]
+        print(source)
+        print(target)
+        
 
         all_source_input_ids = []
         all_source_attention_mask = []
@@ -41,7 +44,7 @@ class TextDataset(Dataset):
         target_remark_labels = target_labels.copy()
         target_remark_labels = target_remark_labels - self._tokenizer.vocab_size
         target_remark_labels[target_remark_labels < 0] = -100
-
+        print(batch)
         batch = {
             "input_ids": np.asarray(all_source_input_ids, dtype=np.int64),
             "attention_mask": np.asarray(all_source_attention_mask, dtype=np.int64),
