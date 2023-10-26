@@ -30,8 +30,8 @@ args = parser.parse_args()
 
 # need to modify
 tokenizer = BertTokenizer.from_pretrained(args.tokenizer_name)
-tokenizer.add_tokens("[title]")
-tokenizer.add_tokens("[ref]")
+# tokenizer.add_tokens("[title]")
+# tokenizer.add_tokens("[ref]")
 # tokenizer.add_tokens("[0]")
 # tokenizer.add_tokens("[1]")
 # tokenizer.add_tokens("[2]")
