@@ -45,6 +45,7 @@ class TextDataset(Dataset):
         target_remark_labels = target_remark_labels - self._tokenizer.vocab_size
         target_remark_labels[target_remark_labels < 0] = -100
         print(batch)
+        sys.exit(1)
         batch = {
             "input_ids": np.asarray(all_source_input_ids, dtype=np.int64),
             "attention_mask": np.asarray(all_source_attention_mask, dtype=np.int64),
