@@ -153,7 +153,8 @@ def train_model(local_rank, ngpus_per_node, train_data, args):
         test_data.extend(src.readlines())
     config = BartConfig.from_pretrained(args.config_name)
     bart = BartForConditionalGeneration.from_pretrained(args.model_name_or_path, config=config)
-    bart.resize_token_embeddings(len(args.tokenizer))
+    print("token size %d " % len(args.tokenizer))
+    # bart.resize_token_embeddings(len(args.tokenizer))
     if args.use_pretrained_ckpt:
         print("Loading pretrained model...")
         model_state_dict = torch.load(args.pretrained_ckpt_path + args.pretrained_ckpt_name, map_location='cpu')
