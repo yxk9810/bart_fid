@@ -56,7 +56,7 @@ def test_model_generation():
     test_data = args.data_dir + args.test_data_name
     config = BartConfig.from_pretrained(args.config_name)
     bart = BartForConditionalGeneration.from_pretrained(args.model_name_or_path, config=config)
-    bart.resize_token_embeddings(len(tokenizer))
+    # bart.resize_token_embeddings(len(tokenizer))
     fid_bart = FiDBART(config)
     fid_bart.load_bart(bart.state_dict())
     model = FusionModel(fid_bart, config)
