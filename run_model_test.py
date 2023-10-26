@@ -66,7 +66,7 @@ def test_model_generation():
     model.eval()
 
     test_dataset = TextDataset(test_data, tokenizer, max_encoding_length=args.max_encoding_length, max_decoding_length=args.max_decoding_length, max_ref_num=args.max_ref_num)
-    test_dataloader = DataLoader(test_dataset, batch_size=4, shuffle=False, num_workers=2)
+    test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False, num_workers=2)
 
     count = 0
     with open(args.result_dir + args.result_data_name, "w", encoding="utf-8") as fw:
