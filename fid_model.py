@@ -29,6 +29,8 @@ class FiDBART(BartForConditionalGeneration):
 
     def generate(self, input_ids, attention_mask, max_length, **kwargs):
         self.model.encoder.n_cands = input_ids.size(1)
+        print(self.model.encoder.n_cands)
+        print(input_ids.size())
         return super().generate(
             input_ids=input_ids.view(input_ids.size(0), -1),
             attention_mask=attention_mask.view(attention_mask.size(0), -1),
