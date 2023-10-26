@@ -89,6 +89,7 @@ def test_model_generation():
                 )
                 outputs = outputs.cpu()
                 batch_out_sentences = tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=True)
+                print(batch_output_sentences)
                 for idx, r in enumerate(batch_out_sentences):
                     fw.write(r + "\n")
                     print(r)
