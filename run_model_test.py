@@ -79,13 +79,11 @@ def test_model_generation():
                     attention_mask=test_data["attention_mask"],
                     max_length=512,
                     # min_length=256,
-                    # no_repeat_ngram_size=3,
+                    no_repeat_ngram_size=3,
                     do_sample=False,
-                    num_beams=1,
+                    num_beams=5,
                     output_attentions=True,
                     output_hidden_states=True
-                    # top_k=40,
-                    # top_p=0.9
                 )
                 outputs = outputs.cpu()
                 print(outputs)
