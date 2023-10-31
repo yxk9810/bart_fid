@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 from chunk_dataset import TextDataset
 from bart_generation import FusionModel
 from fid_model import FiDBART
-from transformers import AdamW, get_linear_schedule_with_warmup, BartConfig, BartModel, BertTokenizer, BartForConditionalGeneration
+from transformers import AdamW, get_linear_schedule_with_warmup, BartConfig, BartModel, BertTokenizer, BartForConditionalGeneration,BartTokenizer
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--model_name_or_path", default="", type=str, help="")
@@ -29,7 +29,7 @@ parser.add_argument("--result_data_name", default="", type=str, help="")
 args = parser.parse_args()
 
 # need to modify
-tokenizer = BertTokenizer.from_pretrained(args.tokenizer_name)
+tokenizer = BertTokenizer.from_pretrained(args.tokenizer_name) if 'facebook' not in args.tokenizer_name else BartTokenizer.from_pretrained(args.tokenizer_name)
 tokenizer.add_tokens("[title]")
 tokenizer.add_tokens("[ref]")
 tokenizer.add_tokens("[0]")
@@ -56,7 +56,7 @@ def test_model_generation():
     test_data = args.data_dir + args.test_data_name
     config = BartConfig.from_pretrained(args.config_name)
     bart = BartForConditionalGeneration.from_pretrained(args.model_name_or_path, config=config)
-    # bart.resize_token_embeddings(len(tokenizer))
+    bart.resize_token_embeddings(len(tokenizer))
     fid_bart = FiDBART(config)
     fid_bart.load_bart(bart.state_dict())
     model = FusionModel(fid_bart, config)
