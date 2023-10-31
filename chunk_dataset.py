@@ -41,6 +41,7 @@ class TextDataset(Dataset):
         target_input_ids = target_encode.input_ids
         target_labels = np.asarray(target_input_ids)
         target_labels[target_labels == self._tokenizer.pad_token_id] = -100
+
         batch = {
             "input_ids": np.asarray(all_source_input_ids, dtype=np.int64),
             "attention_mask": np.asarray(all_source_attention_mask, dtype=np.int64),
