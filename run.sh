@@ -1,14 +1,14 @@
 !python run_model_train.py \
     --data_dir ./ \
     --save_ckpt_name generate.pt \
-    --train_data_name train_data.txt \
-    --test_data_name dev_data.txt \
+    --train_data_name webbrain_sample_g.txt \
+    --test_data_name webbrain_sample_g.txt \
     --per_gpu_train_batch_size 1 \
     --per_gpu_eval_batch_size 4 \
     --output_dir ./output/models/ \
     --result_dir ./output/result/ \
-    --model_name_or_path fnlp/bart-base-chinese \
-    --config_name fnlp/bart-base-chinese \
-    --tokenizer_name fnlp/bart-base-chinese \
+    --model_name_or_path facebook/bart-base \
+    --config_name facebook/bart-base \
+    --tokenizer_name facebook/bart-base \
     --learning_rate 5e-5 \
     --num_train_epochs 5
