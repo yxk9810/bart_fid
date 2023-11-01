@@ -265,6 +265,20 @@ def evaluate(model, X_test, best_result, args):
             for key in test_data.keys():
                 test_data[key] = test_data[key].to(args.device)
             gen_loss = model.forward(test_data)
+            outputs = model.fidbart.generate(
+                    input_ids=test_data["input_ids"],
+                    attention_mask=test_data["attention_mask"],
+                    max_length=512,
+                    # min_length=256,
+                    no_repeat_ngram_size=3,
+                    do_sample=False,
+                    num_beams=5,
+                    output_attentions=True,
+                    output_hidden_states=True
+             )
+            outputs = outputs.cpu()
+            batch_out_sentences = tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=True)
+            print(batch_out_sentences[0])
             all_test_loss += gen_loss.mean().item()
     all_test_loss = all_test_loss / len(test_dataloader)
     if all_test_loss < best_result:
