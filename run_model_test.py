@@ -54,9 +54,9 @@ def set_seed(seed=args.seed):
 
 def test_model_generation():
     test_data = args.data_dir + args.test_data_name
-    test_dataset = []
+    eval_dataset = []
     with open(test_data, encoding="utf8") as src:
-        test_dataset.extend(src.readlines())
+        eval_dataset.extend(src.readlines())
     config = BartConfig.from_pretrained(args.config_name)
     bart = BartForConditionalGeneration.from_pretrained(args.model_name_or_path, config=config)
     bart.resize_token_embeddings(len(tokenizer))
@@ -68,7 +68,7 @@ def test_model_generation():
     model = model.to(device)
     model.eval()
 
-    test_dataset = TextDataset(test_data, tokenizer, max_encoding_length=args.max_encoding_length, max_decoding_length=args.max_decoding_length, max_ref_num=args.max_ref_num)
+    test_dataset = TextDataset(eval_data, tokenizer, max_encoding_length=args.max_encoding_length, max_decoding_length=args.max_decoding_length, max_ref_num=args.max_ref_num)
     test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False, num_workers=2)
 
     count = 0
