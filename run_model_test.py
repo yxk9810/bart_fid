@@ -77,8 +77,8 @@ def test_model_generation():
             for test_data in test_dataloader:
                 for key in test_data.keys():
                     test_data[key] = test_data[key].to(device)
-                print(test_data['input_ids'])
-                print(test_data['attention_mask'])
+                # print(test_data['input_ids'])
+                # print(test_data['attention_mask'])
                 outputs = model.fidbart.generate(
                     input_ids=test_data["input_ids"],
                     attention_mask=test_data["attention_mask"],
