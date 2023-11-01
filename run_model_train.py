@@ -265,7 +265,7 @@ def evaluate(model, X_test, best_result, args):
             for key in test_data.keys():
                 test_data[key] = test_data[key].to(args.device)
             gen_loss = model.forward(test_data)
-            outputs = model.module.generate(
+            outputs = model.module.fidbart.generate(
                     input_ids=test_data["input_ids"],
                     attention_mask=test_data["attention_mask"],
                     max_length=512,
