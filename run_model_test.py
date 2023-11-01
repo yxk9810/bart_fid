@@ -54,6 +54,9 @@ def set_seed(seed=args.seed):
 
 def test_model_generation():
     test_data = args.data_dir + args.test_data_name
+    test_dataset = []
+    with open(test_data, encoding="utf8") as src:
+        test_dataset.extend(src.readlines())
     config = BartConfig.from_pretrained(args.config_name)
     bart = BartForConditionalGeneration.from_pretrained(args.model_name_or_path, config=config)
     bart.resize_token_embeddings(len(tokenizer))
