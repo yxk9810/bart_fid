@@ -30,14 +30,14 @@ args = parser.parse_args()
 
 # need to modify
 tokenizer = BertTokenizer.from_pretrained(args.tokenizer_name) if 'facebook' not in args.tokenizer_name else BartTokenizer.from_pretrained(args.tokenizer_name)
-tokenizer.add_tokens("[title]")
-tokenizer.add_tokens("[ref]")
-tokenizer.add_tokens("[0]")
-tokenizer.add_tokens("[1]")
-tokenizer.add_tokens("[2]")
-tokenizer.add_tokens("[3]")
-tokenizer.add_tokens("[4]")
-tokenizer.add_tokens("[5]")
+# tokenizer.add_tokens("[title]")
+# tokenizer.add_tokens("[ref]")
+# tokenizer.add_tokens("[0]")
+# tokenizer.add_tokens("[1]")
+# tokenizer.add_tokens("[2]")
+# tokenizer.add_tokens("[3]")
+# tokenizer.add_tokens("[4]")
+# tokenizer.add_tokens("[5]")
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(args)
 
@@ -59,7 +59,7 @@ def test_model_generation():
         eval_dataset.extend(src.readlines())
     config = BartConfig.from_pretrained(args.config_name)
     bart = BartForConditionalGeneration.from_pretrained(args.model_name_or_path, config=config)
-    bart.resize_token_embeddings(len(tokenizer))
+    # bart.resize_token_embeddings(len(tokenizer))
     fid_bart = FiDBART(config)
     fid_bart.load_bart(bart.state_dict())
     model = FusionModel(fid_bart, config)
@@ -91,12 +91,12 @@ def test_model_generation():
                     output_hidden_states=True
                 )
                 outputs = outputs.cpu()
-                print(outputs)
+                # print(outputs)
                 batch_out_sentences = tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=True)
                 for idx, r in enumerate(batch_out_sentences):
                     fw.write(r + "\n")
                     print(r)
-                print(count)
+                # print(count)
                 count += 4
 
 
