@@ -277,7 +277,7 @@ def evaluate(model, X_test, best_result, args):
                     output_hidden_states=True
              )
             outputs = outputs.cpu()
-            batch_out_sentences = tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=True)
+            batch_out_sentences = args.tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=True)
             print(batch_out_sentences[0])
             all_test_loss += gen_loss.mean().item()
     all_test_loss = all_test_loss / len(test_dataloader)
