@@ -86,7 +86,7 @@ def test_model_generation():
                     # min_length=256,
                     no_repeat_ngram_size=3,
                     do_sample=False,
-                    num_beams=5,
+                    num_beams=1,
                     output_attentions=True,
                     output_hidden_states=True
                 )
